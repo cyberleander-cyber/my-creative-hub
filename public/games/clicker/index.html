@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Clicker</title>
+<style>
+  html,body{margin:0;height:100%;background:linear-gradient(135deg,#1e1b4b,#312e81);color:#fff;font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;user-select:none}
+  h1{font-size:48px;margin:0}
+  button{margin-top:30px;font-size:24px;padding:24px 48px;border-radius:999px;border:none;background:#f59e0b;color:#1e1b4b;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(245,158,11,.4);transition:transform .1s}
+  button:active{transform:scale(.94)}
+  p{opacity:.7;margin-top:24px}
+</style>
+</head>
+<body>
+<p>Score</p>
+<h1 id="s">0</h1>
+<button onclick="add()">Click me</button>
+<p id="cps">0 / sec</p>
+<script>
+let n=0,last=0,ticks=[];
+function add(){n++;document.getElementById('s').textContent=n;ticks.push(Date.now())}
+setInterval(()=>{const now=Date.now();ticks=ticks.filter(t=>now-t<1000);document.getElementById('cps').textContent=ticks.length+' / sec'},200);
+</script>
+</body>
+</html>

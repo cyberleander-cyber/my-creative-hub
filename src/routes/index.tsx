@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { GameCard } from "@/components/GameCard";
 import { fetchGitHubGames } from "@/lib/github.functions";
 import { loadSettings, type RepoSettings } from "@/lib/settings";
+import { LOCAL_GAMES } from "@/lib/local-games";
 import { Loader2, Search } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -42,7 +43,7 @@ function Home() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const games = data?.games || [];
+  const games = [...LOCAL_GAMES, ...(data?.games || [])];
   const filtered = query
     ? games.filter((g) => g.displayName.toLowerCase().includes(query.toLowerCase()))
     : games;

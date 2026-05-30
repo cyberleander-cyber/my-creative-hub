@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { fetchGitHubGames } from "@/lib/github.functions";
 import { loadSettings, type RepoSettings } from "@/lib/settings";
+import { LOCAL_GAMES } from "@/lib/local-games";
 import { ArrowLeft, ExternalLink, Maximize2 } from "lucide-react";
 
 export const Route = createFileRoute("/tool/$id")({
@@ -39,7 +40,7 @@ function ToolPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const game = data?.games.find((g) => g.id === decoded);
+  const game = [...LOCAL_GAMES, ...(data?.games || [])].find((g) => g.id === decoded);
 
   return (
     <div className="min-h-screen bg-background">
